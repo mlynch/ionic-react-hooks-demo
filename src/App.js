@@ -14,7 +14,6 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
-  console.log("ACTION", state, action);
   if (action.type === 'setPuppers') {
     return { ...state, puppers: action.puppers }
   }

@@ -16,12 +16,10 @@ import { AppContext } from './App';
 
 export const Puppers = () => {
   const { state, dispatch } = useContext(AppContext);
-  const [ puppers, setPuppers ] = useState(state.puppers);
 
   const fetchPuppers = useCallback(async() => {
     const ret = await fetch('https://dog.ceo/api/breeds/image/random/10');
     const json = await ret.json();
-    setPuppers(json.message);
     dispatch({
       type: 'setPuppers',
       puppers: json.message
@@ -45,7 +43,7 @@ export const Puppers = () => {
       </IonToolbar>
     </IonHeader>
     <IonContent>
-      {puppers.map(pupper => {
+      {state.puppers.map(pupper => {
         return (
           <IonCard key={pupper}>
             <IonCardContent>
