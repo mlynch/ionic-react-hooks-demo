@@ -3,6 +3,8 @@
 This is a simple demo using Ionic React and React Hooks that shows how to use a number of hooks,
 including `useState`, `useContext`, `useReducer`, `useCallback`, and even custom hooks!
 
+This app fetches 10 random images from the [Dog API](https://dog.ceo/), storing the last set offline for loading the next time you boot the app.
+
 One of the fun things about this app is that it contains a tiny implementation of redux with automatic persistence to localStorage, all using
 hooks and no external dependencies!
 
