@@ -1,6 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Ionic React Hooks Demo
 
-## Available Scripts
+This is a simple demo using Ionic React and React Hooks that shows how to use a number of hooks,
+including `useState`, `useContext`, `useReducer`, `useCallback`, and even custom hooks!
+
+One of the fun things about this app is that it contains a tiny implementation of redux with automatic persistence to localStorage, all using
+hooks and no external dependencies!
+
+## Running the project:
 
 In the project directory, you can run:
 
