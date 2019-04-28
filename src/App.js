@@ -1,41 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 import {
-  IonApp,
-  IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent
+  IonApp
 } from '@ionic/react';
+import { Puppers } from './Puppers';
+import { useLocalStorage } from './useLocalStorage';
 
-const App = () => {
-  const [ puppers, setPuppers ] = useState([]);
+export const AppContext = createContext();
+
+const initialState = {
+  puppers: []
+}
+
+const reducer = (state, action) => {
+  console.log("ACTION", state, action);
+  if (action.type === 'setPuppers') {
+    return { ...state, puppers: action.puppers }
+  }
+  return state;
+}
+
+const AppContextProvider = (props) => {
+  const [data, setData ] = useLocalStorage('data', initialState);
+
+  let [state, dispatch] = useReducer(reducer, data);
+
+  let value = { state, dispatch };
 
   useEffect(() => {
-    async function fetchPuppers() {
-      const ret = await fetch('https://dog.ceo/api/breeds/image/random/10');
-      const json = await ret.json();
-      setPuppers(json.message);
-    }
-    fetchPuppers();
-  }, []);
+    setData(state);
+  }, [state, setData]);
+
 
   return (
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
+  );
+}
+
+const App = () => {
+  return (
     <IonApp>
-      <IonContent>
-        {puppers.map(pupper => {
-          return (
-            <IonCard key={pupper}>
-              <IonCardContent>
-                <img src={pupper} />
-              </IonCardContent>
-            </IonCard>
-          )
-        })}
-      </IonContent>
+      <AppContextProvider>
+        <Puppers />
+      </AppContextProvider>
     </IonApp>
   );
 }
