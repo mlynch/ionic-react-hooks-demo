@@ -6,7 +6,7 @@ including `useState`, `useContext`, `useReducer`, `useCallback`, and even custom
 One of the fun things about this app is that it contains a tiny implementation of redux with automatic persistence to localStorage, all using
 hooks and no external dependencies!
 
-![Puppers](ss1.png | width=200)
+<img src="ss1.png" width="40%" />
 
 ## Running the project:
 
